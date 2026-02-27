@@ -26,6 +26,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Debug files
+        run: |
+          pwd
+          ls -la
+
       - uses: docker/build-push-action@v5
         with:
           context: .
