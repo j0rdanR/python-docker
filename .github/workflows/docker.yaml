@@ -14,6 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Convert repository name to lowercase
         id: repo
         run: echo "repo=$(echo '${{ github.repository }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
@@ -25,14 +28,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Debug files
-        run: |
-          pwd
-          ls -la
 
       - uses: docker/build-push-action@v5
         with:
